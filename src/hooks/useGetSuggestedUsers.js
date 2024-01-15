@@ -8,6 +8,8 @@ import {
   orderBy,
   query,
   where,
+  doc,
+  getDoc
 } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 
@@ -33,7 +35,20 @@ const useGetSuggestedUsers = () => {
                 querySnapshot.forEach((doc) => {
                     users.push({...doc.data(), id: doc.id});
                 });
-                setSuggestedUsers(users);
+
+                const luke = await getDoc(
+                  doc(db, "users", "Xy5dx57dRBfVKhzogUun5AqN4bj2")
+                );
+
+                const find = users.find((user) => user.id === luke.id);
+
+                if (authUser.uid === luke.id || authUser.following.includes(luke.id) || find) {
+                    setSuggestedUsers(users);
+                }
+                else {
+                    users.unshift({...luke.data(), id: luke.id});
+                    setSuggestedUsers(users);
+                }
             } catch (error) {
                 showToast("Error", error.message, "error");
             } finally {

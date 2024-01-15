@@ -7,6 +7,7 @@ import {
   where,
   collection,
   getDoc,
+  getDocs
 } from "firebase/firestore";
 import useShowToast from "./useShowToast";
 import useAuthStore from "../store/authStore";
@@ -30,9 +31,9 @@ const useSignUpWithEmailAndPassword = () => {
 
     const userRef = collection(db, "users");
     const q = query(userRef, where("username", "==", inputs.username));
-    const querySnapshot = await getDoc(q);
+    const querySnapshot = await getDocs(q);
 
-    if (querySnapshot.exists()) {
+    if (!querySnapshot.empty) {
       showToast("Error", "Username already exists", "error");
       return;
     }
