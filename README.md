@@ -8,6 +8,7 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 # Project: Instagram Clone
+https://social-media-lukewarm3.vercel.app/
 
 The project is a comprehensive web-based Instagram clone with responsive design and features like post creation, user authentication, profile management, user search capability, and real-time interactions. 
 I leveraged React and Chakra UI for front-end development and Firebase for backend management.
